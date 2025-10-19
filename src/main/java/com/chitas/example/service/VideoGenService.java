@@ -30,7 +30,7 @@ import com.mashape.unirest.http.exceptions.UnirestException;
 public class VideoGenService {
     private String apiKeysecretHiggs = System.getenv("API_SECRET_HIGGS");
     private String apiKeyHiggs = System.getenv("API_KEY_HIGGS");
-    private String apiKey = System.getenv("bigOPEN_AI_KEY");
+    private String apiKey = System.getenv("OPEN_AI_KEY");
     private static final String API_URL = "https://api.openai.com/v1/chat/completions";
     private static final String IMAGE_API_URL = "https://platform.higgsfield.ai/v1/text2image/seedream";
     private final ObjectMapper objectMapper = new ObjectMapper();
