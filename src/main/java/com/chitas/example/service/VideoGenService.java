@@ -9,7 +9,6 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
@@ -29,9 +28,9 @@ import com.mashape.unirest.http.exceptions.UnirestException;
 
 @Service
 public class VideoGenService {
-    private String apiKeysecretHiggs = "3cfc6289bebe020f9530a4caf970c02fa3061ac2c282f591933701f2f4e0839e";
-    private String apiKeyHiggs = "c5b344ce-0853-4e29-840a-555c41e7281e";
-    private String apiKey = "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";
+    private String apiKeysecretHiggs = System.getenv("API_SECRET_HIGGS");
+    private String apiKeyHiggs = System.getenv("API_KEY_HIGGS");
+    private String apiKey = System.getenv("bigOPEN_AI_KEY");
     private static final String API_URL = "https://api.openai.com/v1/chat/completions";
     private static final String IMAGE_API_URL = "https://platform.higgsfield.ai/v1/text2image/seedream";
     private final ObjectMapper objectMapper = new ObjectMapper();
@@ -367,7 +366,7 @@ public class VideoGenService {
 
     public void load(List<State> states) {
         queue = states.stream()
-                .collect(Collectors.toMap(State::getId, s -> s, (a, b) -> a, HashMap::new));
+                .collect(Collectors.toMap(State::getId, s -> s, (a, _) -> a, HashMap::new));
     }
 
 }

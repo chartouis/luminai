@@ -3,9 +3,6 @@ package com.chitas.example.service;
 import java.io.*;
 import java.util.List;
 
-import java.io.*;
-import java.util.List;
-
 public class VideoConcatenator {
 
     /**
