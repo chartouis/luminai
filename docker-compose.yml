@@ -1,0 +1,11 @@
+
+services:
+  app:
+    build: .
+    container_name: jobquest
+    ports:
+      - ${PORT:8080}
+    environment:
+      SPRING_DATASOURCE_URL: ${SPRING_DATASOURCE_URL}
+      SPRING_DATASOURCE_USERNAME: ${SPRING_DATASOURCE_USERNAME}
+      SPRING_DATASOURCE_PASSWORD: ${SPRING_DATASOURCE_PASSWORD}
