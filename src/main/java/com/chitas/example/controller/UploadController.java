@@ -33,8 +33,7 @@ public class UploadController {
         if (input.getText() == null || input.getText().isBlank()) {
             return ResponseEntity.badRequest().body("Empty text");
         }
-        vService.pipeline(input.getText(), input.getScene_number());
-        return ResponseEntity.ok("OK");
+        return ResponseEntity.ok(vService.pipeline(input.getText(), input.getScene_number()).toString());
     }
 
     @GetMapping("/states")

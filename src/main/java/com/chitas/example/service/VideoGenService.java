@@ -188,14 +188,15 @@ public class VideoGenService {
         }
     }
 
-    public void pipeline(String prompt, int scene_number) {
+    public UUID pipeline(String prompt, int scene_number) {
         try {
             String response = chat(prompt, scene_number);
             List<Scene> scenes = getScenes(response);
-            batchImg(scenes);
+            return batchImg(scenes);
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return null;
     }
 
     @Scheduled(fixedDelay = 10000)
@@ -263,7 +264,7 @@ public class VideoGenService {
         }
     }
 
-    private void batchImg(List<Scene> scenes) {
+    private UUID batchImg(List<Scene> scenes) {
         UUID batchId = UUID.randomUUID();
         scenes.forEach(scene -> {
             UUID id;
@@ -278,6 +279,7 @@ public class VideoGenService {
                 e.printStackTrace();
             }
         });
+        return batchId;
     }
 
     private boolean updateStatus(UUID id, UUID stateId)
