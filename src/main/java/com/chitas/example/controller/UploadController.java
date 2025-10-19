@@ -1,6 +1,5 @@
 package com.chitas.example.controller;
 
-import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -11,6 +10,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import com.chitas.example.model.Input;
 import com.chitas.example.model.State;
 import com.chitas.example.service.VideoGenService;
 
@@ -28,13 +28,13 @@ public class UploadController {
         this.vService = vService;
     }
 
-    @PostMapping(value = "/plaintext", consumes = MediaType.TEXT_PLAIN_VALUE)
-    public ResponseEntity<String> uploadPlainText(@RequestBody String text) {
-        if (text == null || text.isBlank()) {
+    @PostMapping("/text")
+    public ResponseEntity<String> uploadPlainText(@RequestBody Input input) {
+        if (input.getText() == null || input.getText().isBlank()) {
             return ResponseEntity.badRequest().body("Empty text");
         }
-        vService.pipeline(text);
-        return ResponseEntity.ok("Sent");
+        vService.pipeline(input.getText(), input.getScene_number());
+        return ResponseEntity.ok("OK");
     }
 
     @GetMapping("/states")
